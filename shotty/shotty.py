@@ -26,9 +26,100 @@ def filter_instances(project):
 
 	return instances
 
+#Group by commands: cli
 @click.group()
+def cli():
+	"""cli - Command Line Interface: Shotty manages snapshots"""
+
+#=====================
+#SNAPSHOTS  commands
+#=====================
+@cli.group('snapshot')
+def snapshot():
+	"""Commands for snapshots"""
+
+@snapshot.command('list')
+@click.option('--project', default=None,
+		help="Only snapshots for project _tag Project:<name>)")
+def list_snapshot(project):
+	"List EC2 snapshots"
+
+	instances = filter_instances(project)
+
+	for i in instances:
+		for v in i.volumes.all():
+			for s in v.snapshots.all():
+				print(', '.join((
+					s.id,
+					v.id,
+					i.id,
+					s.state,
+					s.progress,
+					s.start_time.strftime("%c")
+				)))
+
+	return
+
+
+#=====================
+#END SNAPSHOTS commands
+#=====================
+
+
+#=====================
+#Group VOLUMES commands
+#=====================
+@cli.group('volumes')
+def volumes():
+	"""Commands for volumes"""
+
+@volumes.command('list')
+@click.option('--project', default=None,
+		help="Only volumes for project _tag Project:<name>)")
+def list_volumes(project):
+	"List EC2 volumes"
+
+	instances = filter_instances(project)
+
+	for i in instances:
+		for v in i.volumes.all():
+			print(', '.join((
+				v.id,
+				i.id,
+				v.state,
+				str(v.size) + "GiB",
+				v.encrypted and "Encrypted" or "Not Encrypted"
+			)))
+
+	return
+
+
+#=====================
+#END Group VOLUMES commands
+#=====================
+
+#=====================
+#Group INSTANCES commands
+#=====================
+@cli.group('instances')
 def instances():
 	"""Commands for instances"""
+
+@instances.command('snapshot',
+	help="Create snapshots of all volumes")
+@click.option('--project', default=None,
+		help="Only instances for project _tag Project:<name>)")
+def create_snapshots(project):
+	"Create snapshots for EC2 instances"
+
+	instances = filter_instances(project)
+
+	for i in instances:
+		for v in i.volumes.all():
+			print("Creating snapshot of {0}".format(v.id))
+			v.create_snapshot(Description="Created by snapshotAlyzer 30000")
+
+	return
 
 @instances.command('list')
 @click.option('--project', default=None,
@@ -60,6 +151,7 @@ def stop_instances(project):
 	instances = filter_instances(project)
 
 	for i in instances:
+
 		print("Stopping {0}...".format(i.id))
 		i.stop()
 
@@ -78,11 +170,14 @@ def start_instances(project):
 		i.start()
 
 	return
+#=====================
+#END Group INSTANCES commands
+#=====================
 
 #======================================
 #bloco de execucao
 #======================================
 if __name__ == '__main__':
 	#print(sys.argv)
-	instances()
+	cli()
 

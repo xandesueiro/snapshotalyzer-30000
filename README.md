@@ -14,18 +14,46 @@ shotty uses the configuration file created by the AWS cli, e.g.
 
 ## Running
 
-'pipenv run python "shotty/shotty.py <command> <--project=PROJECT>"'
+'pipenv run python "shotty/shotty.py <command> <subcommand> <--project=PROJECT>"'
 
-*command* is list, stop or start
+*command* is instances, volumes and snapshots 
+*subcommand* depends on command
 *project* is optional. It's a tag in EC2 instance  (e.g. --project=Valkyrie)
 
-pipenv run python shotty/shotty.py list --project=Valkyrie
-pipenv run python shotty/shotty.py stop --project=Valkyrie
-pipenv run python shotty/shotty.py start --project=Valkyrie
-pipenv run python shotty/shotty.py --help
-pipenv run python shotty/shotty.py list --help
-pipenv run python shotty/shotty.py stop --help
-pipenv run python shotty/shotty.py start --help
+*help* commands
+pipenv run python shotty/shotty.py instances --help
+pipenv run python shotty/shotty.py instances list --help
+pipenv run python shotty/shotty.py instances stop --help
+pipenv run python shotty/shotty.py instances start --help
+
+pipenv run python shotty/shotty.py volumes --help
+pipenv run python shotty/shotty.py volumes list --help
+
+pipenv run python shotty/shotty.py snapshot list --help
+
+
+*all* instances
+pipenv run python shotty/shotty.py instances list
+pipenv run python shotty/shotty.py instances stop
+pipenv run python shotty/shotty.py instances start
+
+pipenv run python shotty/shotty.py volumes list
+
+pipenv run python shotty/shotty.py snapshot list
+
+
+
+*filter* instances, volumes and snapshots by project
+pipenv run python shotty/shotty.py instances list --project=Valkyrie
+pipenv run python shotty/shotty.py instances stop --project=Valkyrie
+pipenv run python shotty/shotty.py instances start --project=Valkyrie
+
+pipenv run python shotty/shotty.py volumes list --project=Valkyrie
+
+pipenv run python shotty/shotty.py snapshot list --project=Valkyrie
+
+
+
 
 
 
