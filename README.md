@@ -29,7 +29,7 @@ pipenv run python shotty/shotty.py instances start --help
 pipenv run python shotty/shotty.py volumes --help
 pipenv run python shotty/shotty.py volumes list --help
 
-pipenv run python shotty/shotty.py snapshot list --help
+pipenv run python shotty/shotty.py snapshots list --help
 
 
 *all* instances
@@ -39,7 +39,7 @@ pipenv run python shotty/shotty.py instances start
 
 pipenv run python shotty/shotty.py volumes list
 
-pipenv run python shotty/shotty.py snapshot list
+pipenv run python shotty/shotty.py snapshots list
 
 
 
@@ -50,7 +50,10 @@ pipenv run python shotty/shotty.py instances start --project=Valkyrie
 
 pipenv run python shotty/shotty.py volumes list --project=Valkyrie
 
-pipenv run python shotty/shotty.py snapshot list --project=Valkyrie
+pipenv run python shotty/shotty.py snapshots list --project=Valkyrie
+
+pipenv run python shotty/shotty.py instances snapshot-vol --project=Valkyrie
+
 
 
 
