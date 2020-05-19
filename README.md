@@ -25,10 +25,8 @@ pipenv run python shotty/shotty.py instances --help
 pipenv run python shotty/shotty.py instances list --help
 pipenv run python shotty/shotty.py instances stop --help
 pipenv run python shotty/shotty.py instances start --help
-
 pipenv run python shotty/shotty.py volumes --help
 pipenv run python shotty/shotty.py volumes list --help
-
 pipenv run python shotty/shotty.py snapshots list --help
 
 
@@ -36,18 +34,14 @@ pipenv run python shotty/shotty.py snapshots list --help
 pipenv run python shotty/shotty.py instances list
 pipenv run python shotty/shotty.py instances stop
 pipenv run python shotty/shotty.py instances start
-
 pipenv run python shotty/shotty.py volumes list
-
 pipenv run python shotty/shotty.py snapshots list
-
 
 
 *filter* instances, volumes and snapshots by project
 pipenv run python shotty/shotty.py instances list --project=Valkyrie
 pipenv run python shotty/shotty.py instances stop --project=Valkyrie
 pipenv run python shotty/shotty.py instances start --project=Valkyrie
-
 pipenv run python shotty/shotty.py volumes list --project=Valkyrie
 
 *list the most recent snapshots*
