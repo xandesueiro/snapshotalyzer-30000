@@ -50,8 +50,13 @@ pipenv run python shotty/shotty.py instances start --project=Valkyrie
 
 pipenv run python shotty/shotty.py volumes list --project=Valkyrie
 
-pipenv run python shotty/shotty.py snapshots list --project=Valkyrie
+*list the most recent snapshots*
+pipenv run python shotty/shotty.py snapshots list --project=Valkyri
 
+*List all snapshots*
+$ pipenv run python shotty/shotty.py snapshots list --project=Valkyrie --all
+
+*create snapshot*
 pipenv run python shotty/shotty.py instances snapshot-vol --project=Valkyrie
 
 
